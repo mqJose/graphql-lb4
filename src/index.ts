@@ -1,4 +1,5 @@
-import {ApplicationConfig, App} from './application';
+import {GraphQLServerOptions} from '@loopback/graphql';
+import {App, ApplicationConfig} from './application';
 
 export * from './application';
 
@@ -9,16 +10,22 @@ export async function main(options: ApplicationConfig = {}) {
 
   const url = app.restServer.url;
   console.log(`Server is running at ${url}`);
-  console.log(`Try ${url}/ping`);
+  console.log(`Try ${url}/graphql`);
 
   return app;
 }
 
 if (require.main === module) {
+  const graphqlCfg: GraphQLServerOptions = {
+    apollo: {
+      subscriptions: '/subscriptions',
+    },
+    asMiddlewareOnly: true,
+  };
   // Run the application
   const config = {
     rest: {
-      port: +(process.env.PORT ?? 3000),
+      port: +(process.env.PORT ?? 4000),
       host: process.env.HOST,
       // The `gracePeriodForClose` provides a graceful close for http/https
       // servers with keep-alive clients. The default value is `Infinity`
@@ -31,6 +38,7 @@ if (require.main === module) {
         setServersFromRequest: true,
       },
     },
+    graphql: graphqlCfg,
   };
   main(config).catch(err => {
     console.error('Cannot start the application.', err);

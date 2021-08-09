@@ -26,7 +26,7 @@
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "docker:build": "docker build -t graphql-lb4-backend .",
-    "docker:run": "docker run -p 3000:3000 -d graphql-lb4-backend",
+    "docker:run": "docker run -p4000:4000 -d graphql-lb4-backend",
     "premigrate": "npm run build",
     "migrate": "node ./dist/migrate",
     "preopenapi-spec": "npm run build",
@@ -56,6 +56,7 @@
     "@loopback/rest": "^10.0.0",
     "@loopback/rest-explorer": "^3.3.2",
     "@loopback/service-proxy": "^3.2.2",
+    "class-transformer": "^0.4.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
