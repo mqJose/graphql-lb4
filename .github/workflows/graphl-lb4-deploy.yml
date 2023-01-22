@@ -1,4 +1,4 @@
-name: graphql-lb4-ci
+name: graphql-lb4-CI
 
 on:
   # Triggers the workflow on push or pull request events but only for the dev branch
